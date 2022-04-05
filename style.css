@@ -195,7 +195,7 @@ header .navbar {
   left: 8%;
 }
 
-.banner .card .return-date>i {
+.banner .card .return-date > i {
   position: absolute;
   top: 72%;
   left: 8%;
@@ -211,6 +211,9 @@ header .navbar {
 #find-vehicle i {
   padding-left: 3%;
 }
+#find-vehicle:hover {
+  border: #eee solid 2px;
+}
 
 #pick-up,
 #return {
@@ -222,13 +225,16 @@ header .navbar {
   padding: 0;
 }
 
+#pick-up:hover,#return:hover {
+  border: #1a6692 solid 2px;
+}
+
 input[type="date"]::-webkit-calendar-picker-indicator {
   position: absolute;
-  left: 5%;
+  left: 6%;
   margin: 0;
-  width: 88%;
-  height: 9%;
-  opacity: 0;
+  width: 78%;
+  height: 7%;
 }
 
 #location {
@@ -355,6 +361,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 #readMore a {
   color: #eee;
+  margin-bottom: 3%;
 }
 
 /* Services */
@@ -483,5 +490,14 @@ footer .inner-content p a {
   .navbar .navbar-nav .show>.nav-link {
     color: #f33f3f !important;
     padding-bottom: 15px;
+  }
+
+  .card {
+    position: relative !important;
+    width: auto !important;
+    height: auto !important;
+    right: auto !important;
+    padding: 2%;
+    margin-bottom: 5%;  
   }
 }
