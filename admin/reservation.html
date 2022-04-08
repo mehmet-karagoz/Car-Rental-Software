@@ -51,12 +51,12 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item active">
+              <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="index.html"
                   >Dashboard</a
                 >
               </li>
-              <li class="nav-item">
+              <li class="nav-item active">
                 <a class="nav-link" href="reservation.html">Reservation</a>
               </li>
 
@@ -73,45 +73,9 @@
     </header>
     <br /><br /><br /><br /><br />
 
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3">
-          <div class="card-counter primary">
-            <i class="fa fa-code-fork"></i>
-            <span class="count-numbers">12</span>
-            <span class="count-name">Locations</span>
-          </div>
-        </div>
-
-        <div class="col-md-3">
-          <div class="card-counter danger">
-            <i class="fa fa-ticket"></i>
-            <span class="count-numbers">599</span>
-            <span class="count-name">Reservations</span>
-          </div>
-        </div>
-
-        <div class="col-md-3">
-          <div class="card-counter success">
-            <i class="fa fa-database"></i>
-            <span class="count-numbers">$6875</span>
-            <span class="count-name">Income</span>
-          </div>
-        </div>
-
-        <div class="col-md-3">
-          <div class="card-counter info">
-            <i class="fa fa-users"></i>
-            <span class="count-numbers">35</span>
-            <span class="count-name">Users</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="container recent-bookings">
-      <h3>Recent Car Bookings</h3>
-      <table class="table table-hover">
+      <h3>Last 10 Day Car Bookings</h3>
+      <table class="table table-hover" id="myTable">
         <thead>
           <tr>
             <th>Booking</th>
@@ -119,6 +83,7 @@
             <th>Status</th>
             <th>Date</th>
             <th>Amount</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -147,6 +112,23 @@
             </td>
             <td>20 Sep 2020</td>
             <td>$2000</td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+                onclick="deleteRow(this);"
+              >
+                Delete
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-info"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                Info
+              </button>
+            </td>
           </tr>
           <tr>
             <td>
@@ -173,6 +155,23 @@
             </td>
             <td>20 Sep 2020</td>
             <td>$2000</td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+                onclick="deleteRow(this);"
+              >
+                Delete
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-info"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                Info
+              </button>
+            </td>
           </tr>
           <tr>
             <td>
@@ -199,9 +198,80 @@
             </td>
             <td>20 Sep 2020</td>
             <td>$2000</td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+                onclick="deleteRow(this);"
+              >
+                Delete
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-info"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                Info
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
+    </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Customer Profile</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="card">
+              <img src="../images/team_04.jpg" alt="John" style="width: 100%" />
+              <h3>Anna Doe</h3>
+              <p class="title">CEO & Founder, Example</p>
+              <p>Harvard University</p>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil,
+                temporibus.
+              </p>
+              <h5>Number Of Booking: <span>25</span></h5>
+              <h5>Status: <span>Progress</span></h5>
+              <h5>Car: <span>BMW</span></h5>
+              <div style="margin: 24px 0">
+                <a href="#"><i class="fa fa-dribbble"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-facebook"></i></a>
+              </div>
+              <p><button>Contact</button></p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Footer -->
@@ -222,5 +292,6 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
+    <script src="js/custom.js"></script>
   </body>
 </html>
