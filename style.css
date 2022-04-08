@@ -237,7 +237,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   height: 7%;
 }
 
-#location {
+#location ,#p-location, #r-location{
   text-align: center;
   text-transform: capitalize;
   width: 100%;
@@ -717,5 +717,9 @@ footer .inner-content p a {
   #payment-card > div > div.col-4 , #payment-card > div > div.col-8{
     display: block;
     width: auto;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
   }
 }
