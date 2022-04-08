@@ -66,3 +66,17 @@ function parseURLParams(url) {
     }
     return parms;
 }
+var checkBoxShowLocation = document.querySelector("#flexCheckChecked");
+var dropdownLocation = document.querySelector("#address-card > form > div > div:nth-child(3) > div > div");
+
+console.log(dropdownLocation.style.display === '');
+checkBoxShowLocation.addEventListener('click', function() {
+      if (dropdownLocation.style.display !== '') {
+        
+        dropdownLocation.style.display = '';
+    }else {
+      window.setTimeout(function(){
+        dropdownLocation.style.display = 'none';
+      },.2); // timed to match animation-duration
+    }
+});
