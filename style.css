@@ -266,6 +266,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .section-heading h2 {
   margin-bottom: 5%;
   font-weight: bold;
+  font-size: 28px;
+	font-weight: 400;
+	color: #1e1e1e;
+	margin-bottom: 15px;
 }
 
 .item-box {
@@ -322,7 +326,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .left-content p {
   margin-bottom: 25px;
-  font-weight: bolder;
   padding-top: 5%;
 }
 
@@ -655,6 +658,54 @@ footer .inner-content p a {
   text-decoration: none;
   cursor: pointer;
 }
+
+.about-features img {
+  margin-bottom: 30px;
+}
+/* Best Features */
+
+.about-features {
+	margin-top: 100px!important;
+}
+.best-features p {
+	margin-bottom: 25px;
+}
+.about-features p {
+	border-bottom: 1px solid #eee;
+	padding-bottom: 20px;
+}
+
+.about-features .container .row {
+	padding-bottom: 0px!important;
+	border-bottom: none!important;
+}
+
+ul.social-icons li {
+	display: inline-block;
+	margin-right: 3px;
+}
+
+ul.social-icons li:last-child {
+	margin-right: 0px;
+}
+
+ul.social-icons li a {
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+	line-height: 50px;
+	background-color: #eee;
+	color: #121212;
+	font-size: 18px;
+	text-align: center;
+	transition: all .3s;
+}
+
+ul.social-icons li a:hover {
+	background-color: #f33f3f;
+	color: #fff;
+}
+
 
 @media (max-width: 992px) {
   .navbar .navbar-brand {
