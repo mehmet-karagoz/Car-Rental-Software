@@ -26,7 +26,7 @@
     <header>
       <nav class="navbar navbar-expand-lg">
         <div class="container">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="index.php">
             <h2>Car Rental <em>Software</em></h2>
           </a>
           <button
@@ -43,23 +43,23 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="index.html"
+                <a class="nav-link" aria-current="page" href="index.php"
                   >Home</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="reservation.html">Reservation</a>
+                <a class="nav-link" href="reservation.php">Reservation</a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="about-us.html">About Us</a>
+                <a class="nav-link" href="about-us.php">About Us</a>
               </li>
 
               <li class="nav-item active">
-                <a class="nav-link" href="contact.html">Contact Us</a>
+                <a class="nav-link" href="contact.php">Contact Us</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="login.html">Login/Register</a>
+                <a class="nav-link" href="login.php">Login/Register</a>
               </li>
             </ul>
           </div>

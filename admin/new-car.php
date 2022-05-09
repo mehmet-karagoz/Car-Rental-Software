@@ -35,7 +35,7 @@
     <header>
       <nav class="navbar navbar-expand-lg">
         <div class="container">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="index.php">
             <h2>ADMIN <em>PANEL</em></h2>
           </a>
           <button
@@ -52,19 +52,19 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="index.html"
+                <a class="nav-link" aria-current="page" href="index.php"
                   >Dashboard</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="reservation.html">Reservation</a>
+                <a class="nav-link" href="reservation.php">Reservation</a>
               </li>
 
               <li class="nav-item active">
-                <a class="nav-link" href="car.html">Cars</a>
+                <a class="nav-link" href="car.php">Cars</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="login.html">Login</a>
+                <a class="nav-link" href="login.php">Login</a>
               </li>
             </ul>
           </div>
@@ -72,7 +72,6 @@
       </nav>
     </header>
     <br /><br /><br /><br /><br />
-
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
       <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
         <path
@@ -80,15 +79,6 @@
         />
       </symbol>
       <
-      <symbol
-        id="exclamation-triangle-fill"
-        fill="currentColor"
-        viewBox="0 0 16 16"
-      >
-        <path
-          d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
-        />
-      </symbol>
     </svg>
     <div
       id="success"
@@ -105,108 +95,94 @@
       >
         <use xlink:href="#check-circle-fill" />
       </svg>
-      <div>Successfully Changed</div>
+      <div>Successfully Added</div>
       <button
         type="button"
         class="btn-close"
         data-bs-dismiss="alert"
         aria-label="Close"
+        onclick="location.href = '/admin/car.php';"
       ></button>
     </div>
-    <div
-      id="danger"
-      class="alert alert-danger d-flex align-items-center alert-dismissible fade show"
-      role="alert"
-      style="display: none !important"
-    >
-      <svg
-        class="bi flex-shrink-0 me-2"
-        width="24"
-        height="24"
-        role="img"
-        aria-label="Danger:"
-      >
-        <use xlink:href="#exclamation-triangle-fill" />
-      </svg>
-      <div>An example danger alert with an icon</div>
-      <button
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="alert"
-        aria-label="Close"
-      ></button>
-    </div>
-    <div class="container-md overflow-hidden">
-      <div class="row">
-        <div class="col-md-4">
-          <img src="../images/product-1-370x270.jpg" class="img-fluid" alt="" />
-        </div>
-        <div class="col-md-8">
+
+    <!-- Modal -->
+    <div id="reservationModal" class="container">
+      <!-- Modal Content -->
+      <div class="modal-content">
+        <div class="container p-0" id="modal-text">
           <div class="row">
-            <div class="col-8">
-              <h4 style="text-align: center">Car Details</h4>
-            </div>
-            <div class="col-4">
-              <a
-                class="btn btn-primary bg-danger text-center d-block w-100 m-auto"
-                onclick="showAlertDanger();"
-              >
-                Delete
-              </a>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <div class="d-flex flex-column">
-                <p class="text mb-1">Company Name</p>
-                <input
-                  class="form-control mb-3"
-                  type="text"
-                  placeholder="Company Name"
-                  value="Volkswagen"
-                />
-              </div>
-            </div>
-            <div class="col-12">
-              <div class="d-flex flex-column">
-                <p class="text mb-1">Type</p>
-                <input
-                  class="form-control mb-3"
-                  type="text"
-                  placeholder="Premium"
-                  value="Premium"
-                />
-              </div>
-            </div>
-            <div class="col-8">
-              <div class="d-flex flex-column">
-                <p class="text mb-1">Owner Name</p>
-                <input
-                  class="form-control mb-3"
-                  type="text"
-                  placeholder="Vali Efml"
-                  value="Anna Sarfv"
-                />
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="d-flex flex-column">
-                <p class="text mb-1">Price</p>
-                <input
-                  class="form-control mb-3 pt-2"
-                  type="text"
-                  placeholder="$232"
-                  value="$3400"
-                />
-              </div>
-            </div>
-            <div class="col-12">
+            <div class="col-md-4">
+              <img
+                src="../images/product-1-370x270.jpg"
+                class="img-fluid"
+                alt=""
+              />
               <button
-                class="btn btn-primary bg-success text-center d-block w-100 m-auto"
-                onclick="showAlert();"
+                class="btn btn-primary bg-info text-center d-block w-100 m-auto"
               >
-                Save Changes
+                Upload image
               </button>
+            </div>
+            <div class="col-md-8">
+              <div class="row">
+                <div class="col">
+                  <h4 style="text-align: center">Add New Car</h4>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="d-flex flex-column">
+                    <p class="text mb-1">Company Name</p>
+                    <input
+                      class="form-control mb-3"
+                      type="text"
+                      placeholder="Company Name"
+                      value="Volkswagen"
+                    />
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="d-flex flex-column">
+                    <p class="text mb-1">Type</p>
+                    <input
+                      class="form-control mb-3"
+                      type="text"
+                      placeholder="Premium"
+                      value="Premium"
+                    />
+                  </div>
+                </div>
+                <div class="col-8">
+                  <div class="d-flex flex-column">
+                    <p class="text mb-1">Owner Name</p>
+                    <input
+                      class="form-control mb-3"
+                      type="text"
+                      placeholder="Vali Efml"
+                      value="Anna Sarfv"
+                    />
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="d-flex flex-column">
+                    <p class="text mb-1">Price</p>
+                    <input
+                      class="form-control mb-3 pt-2"
+                      type="text"
+                      placeholder="$232"
+                      value="$3400"
+                    />
+                  </div>
+                </div>
+                <div class="col-12">
+                  <button
+                    class="btn btn-primary bg-success text-center d-block w-100 m-auto"
+                    onclick="showAlert();"
+                  >
+                    Add New Car
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

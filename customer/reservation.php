@@ -13,21 +13,12 @@
       crossorigin="anonymous"
     />
 
-    <link rel="stylesheet" href="../customer/css/style.css" />
     <link rel="stylesheet" href="css/style.css" />
 
     <script
       src="https://kit.fontawesome.com/8df3f43431.js"
       crossorigin="anonymous"
     ></script>
-
-    <link
-      href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-      rel="stylesheet"
-      id="bootstrap-css"
-    />
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </head>
 
   <body>
@@ -35,8 +26,8 @@
     <header>
       <nav class="navbar navbar-expand-lg">
         <div class="container">
-          <a class="navbar-brand" href="index.html">
-            <h2>ADMIN <em>PANEL</em></h2>
+          <a class="navbar-brand" href="index.php">
+            <h2>Car Rental <em>Software</em></h2>
           </a>
           <button
             class="navbar-toggler"
@@ -52,32 +43,178 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="index.html"
-                  >Dashboard</a
+                <a class="nav-link" aria-current="page" href="index.php"
+                  >Home</a
                 >
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="reservation.html">Reservation</a>
+              <li class="nav-item active">
+                <a class="nav-link" href="reservation.php">Reservation</a>
               </li>
 
-              <li class="nav-item active">
-                <a class="nav-link" href="car.html">Cars</a>
+              <li class="nav-item">
+                <a class="nav-link" href="about-us.php">About Us</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="contact.php">Contact Us</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="login.html">Login</a>
+                <a class="nav-link" href="login.php">Login/Register</a>
               </li>
             </ul>
           </div>
         </div>
       </nav>
     </header>
-    <br /><br /><br /><br /><br />
-    <a
-      class="btn btn-primary d-block w-50 m-auto bookCar text-white bg-dark border-dark"
-      href="new-car.html"
+
+    <!-- Page Content -->
+    <div
+      class="page-heading about-heading header-text"
+      style="background-image: url(../images/heading-6-1920x500.jpg)"
     >
-      Add New Car
-    </a>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="text-content">
+              <h4>Lorem ipsum dolor sit amet</h4>
+              <h2>Reservation</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="reservationModal" class="modal">
+      <!-- Modal Content -->
+      <div class="modal-content">
+        <div class="container p-0" id="modal-text">
+          <div class="card" id="address-card">
+            <h4 class="text-center fw-bold">Address Details</h4>
+            <form action="" method="get">
+              <div class="row">
+                <div class="col-12">
+                  <div class="d-flex flex-column">
+                    <h5 class="text mb-1">Pick-up</h5>
+                    <div class="dropdown">
+                      <select name="pick-up-location" id="p-location">
+                        <option value="d" selected>Antalya</option>
+                        <option value="1">Ankara</option>
+                        <option value="2">Isparta</option>
+                        <option value="3">İstanbul</option>
+                      </select>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="flexCheckChecked"
+                        checked
+                      />
+                      <label class="form-check-label" for="flexCheckChecked">
+                        Return to the same location
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="d-flex flex-column">
+                    <div class="pick-up-date">
+                      <input type="date" name="pick-up" id="pick-up" required />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="d-flex flex-column">
+                    <h5 class="text mb-1">Return</h5>
+                    <div class="dropdown" style="display: none">
+                      <select name="return-location" id="r-location">
+                        <option value="d" selected>Antalya</option>
+                        <option value="1">Ankara</option>
+                        <option value="2">Isparta</option>
+                        <option value="3">İstanbul</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="d-flex flex-column">
+                    <div class="return-date mt-2">
+                      <input type="date" name="return" id="return" required />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <button
+                    onclick="openPayment();"
+                    class="btn btn-primary d-block w-100 h-75 mb-3"
+                    type="submit"
+                    id="find-vehicle"
+                  >
+                    Find a vehicle<i class="fa fa-arrow-right"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="card" id="payment-card">
+            <h4 class="text-center fw-bold">Payment Details</h4>
+            <div class="row">
+              <div class="col-12">
+                <div class="d-flex flex-column">
+                  <p class="text mb-1">Person Name</p>
+                  <input
+                    class="form-control mb-3"
+                    type="text"
+                    placeholder="Name"
+                    value="Barry Allen"
+                  />
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="d-flex flex-column">
+                  <p class="text mb-1">Card Number</p>
+                  <input
+                    class="form-control mb-3"
+                    type="text"
+                    placeholder="1234 5678 435678"
+                  />
+                </div>
+              </div>
+              <div class="col-8">
+                <div class="d-flex flex-column">
+                  <p class="text mb-1">Expiry</p>
+                  <input
+                    class="form-control mb-3"
+                    type="text"
+                    placeholder="MM/YYYY"
+                  />
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="d-flex flex-column">
+                  <p class="text mb-1">CVV/CVC</p>
+                  <input
+                    class="form-control mb-3 pt-2"
+                    type="password"
+                    placeholder="***"
+                  />
+                </div>
+              </div>
+              <div class="col-12">
+                <button class="btn btn-primary mb-3">
+                  <span class="ps-3">Pay $243</span>
+                  <span class="fas fa-arrow-right"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="close">&times;</span>
+      </div>
+    </div>
+
     <!-- Cars -->
     <div class="products">
       <div class="container">
@@ -115,12 +252,11 @@
                 </small>
 
                 <span>
-                  <a
-                    class="btn btn-primary d-block w-100 bookCar text-white bg-dark border-dark"
-                    href="car-detail.html"
+                  <button
+                    class="btn btn-primary d-block w-100 bookCar bg-dark border-dark"
                   >
-                    Edit
-                  </a>
+                    Book now
+                  </button>
                 </span>
               </div>
             </div>
@@ -159,12 +295,11 @@
                 </small>
 
                 <span>
-                  <a
-                    class="btn btn-primary d-block w-100 bookCar text-white bg-dark border-dark"
-                    href="car-detail.html"
+                  <button
+                    class="btn btn-primary d-block w-100 bookCar bg-dark border-dark"
                   >
-                    Edit
-                  </a>
+                    Book now
+                  </button>
                 </span>
               </div>
             </div>
@@ -203,12 +338,11 @@
                 </small>
 
                 <span>
-                  <a
-                    class="btn btn-primary d-block w-100 bookCar text-white bg-dark border-dark"
-                    href="car-detail.html"
+                  <button
+                    class="btn btn-primary d-block w-100 bookCar bg-dark border-dark"
                   >
-                    Edit
-                  </a>
+                    Book now
+                  </button>
                 </span>
               </div>
             </div>
@@ -247,12 +381,11 @@
                 </small>
 
                 <span>
-                  <a
-                    class="btn btn-primary d-block w-100 bookCar text-white bg-dark border-dark"
-                    href="car-detail.html"
+                  <button
+                    class="btn btn-primary d-block w-100 bookCar bg-dark border-dark"
                   >
-                    Edit
-                  </a>
+                    Book now
+                  </button>
                 </span>
               </div>
             </div>
@@ -291,12 +424,11 @@
                 </small>
 
                 <span>
-                  <a
-                    class="btn btn-primary d-block w-100 bookCar text-white bg-dark border-dark"
-                    href="car-detail.html"
+                  <button
+                    class="btn btn-primary d-block w-100 bookCar bg-dark border-dark"
                   >
-                    Edit
-                  </a>
+                    Book now
+                  </button>
                 </span>
               </div>
             </div>
@@ -335,12 +467,11 @@
                 </small>
 
                 <span>
-                  <a
-                    class="btn btn-primary d-block w-100 bookCar text-white bg-dark border-dark"
-                    href="car-detail.html"
+                  <button
+                    class="btn btn-primary d-block w-100 bookCar bg-dark border-dark"
                   >
-                    Edit
-                  </a>
+                    Book now
+                  </button>
                 </span>
               </div>
             </div>
@@ -379,5 +510,7 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
+
+    <script src="js/custom.js"></script>
   </body>
 </html>

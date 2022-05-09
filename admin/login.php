@@ -35,7 +35,7 @@
     <header>
       <nav class="navbar navbar-expand-lg">
         <div class="container">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="index.php">
             <h2>ADMIN <em>PANEL</em></h2>
           </a>
           <button
@@ -52,19 +52,19 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="index.html"
+                <a class="nav-link" aria-current="page" href="index.php"
                   >Dashboard</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="reservation.html">Reservation</a>
+                <a class="nav-link" href="reservation.php">Reservation</a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="car.html">Cars</a>
+                <a class="nav-link" href="car.php">Cars</a>
               </li>
               <li class="nav-item active">
-                <a class="nav-link" href="login.html">Login</a>
+                <a class="nav-link" href="login.php">Login</a>
               </li>
             </ul>
           </div>
@@ -75,7 +75,7 @@
 
     <div class="card mt-5 p-3 w-auto" id="login-card">
         <h4 class="text-center fw-bold">Login</h4>
-        <form action="index.html" method="get">
+        <form action="index.php" method="get">
           <div class="row">
             <div class="col-12">
               <div class="d-flex flex-column">
@@ -104,7 +104,7 @@
                 class="btn btn-primary bg-danger border-dark d-block w-100 h-75 mb-3"
                 type="submit"
                 id="login"
-                onclick="location.href = '/admin/index.html';"
+                onclick="location.href = '/admin/index.php';"
               >
                 Login
               </button>
