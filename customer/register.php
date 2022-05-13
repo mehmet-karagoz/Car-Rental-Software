@@ -85,17 +85,41 @@
     </div>
 
     <div class="container">
-      <div class="card mt-5 p-3 w-auto" id="login-card">
-        <h4 class="text-center fw-bold">Login</h4>
+      <div class="card mt-5 p-3 w-auto" id="register-card">
+        <h4 class="text-center fw-bold">Register</h4>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
           <div class="row">
+            <div class="col-12">
+              <div class="d-flex flex-column">
+                <p class="text mb-1">First Name</p>
+                <input
+                  class="form-control mb-3"
+                  type="text"
+                  name="firstname"
+                  placeholder="First Name"
+                  required
+                />
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="d-flex flex-column">
+                <p class="text mb-1">Last Name</p>
+                <input
+                  class="form-control mb-3"
+                  type="text"
+                  name="lastname"
+                  placeholder="Last Name"
+                  required
+                />
+              </div>
+            </div>
             <div class="col-12">
               <div class="d-flex flex-column">
                 <p class="text mb-1">Email</p>
                 <input
                   class="form-control mb-3"
-                  name = "email"
                   type="text"
+                  name="email"
                   placeholder="Email"
                   required
                 />
@@ -114,54 +138,103 @@
               </div>
             </div>
             <div class="col-12">
+              <div class="d-flex flex-column">
+                <p class="text mb-1">Date of birth</p>
+                <input
+                  class="form-control mb-3"
+                  type="date"
+                  name="dob"
+                  placeholder="DOB"
+                  id="dob"
+                  required
+                />
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="d-flex flex-column">
+                <p class="text mb-1">Address</p>
+                <input
+                  class="form-control mb-3"
+                  type="text"
+                  name="address"
+                  placeholder="Antalya/Konyaaltı"
+                  
+                />
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="d-flex flex-column mb-3">
+                <span class="text mb-1">Gender : </span>
+                <span><input type="radio" name="gender" value="female"> Female</span>
+                <span><input type="radio" name="gender" value="male"> Male</span>
+              </div>
+            </div>
+            <div class="col-12">
               <button
                 class="btn btn-primary bg-danger border-dark d-block w-100 h-50 mb-3"
                 type="submit"
                 id="register"
               >
-                Login
+                Register
               </button>
               
             </div>
           </div>
         </form>
         <h5>
-                Don't you have an account? Please register.
+                Already have an account? Please sign in.
                 <span
                   ><button
-                    onclick="window.location.href= 'register.php';"
+                    onclick="window.location.href = 'login.php';"
                     class="btn btn-primary bg-danger border-dark h-50 mb-3"
                     type="submit"
                     id="login"
                   >
-                    Register
+                    Login
                   </button></span
                 >
               </h5>
       </div>
+
+      
     </div>
 
     <?php 
       require_once "../config.php";
-      $email = $password = "";
+      $first_name = $last_name = $email = $password = $dob = $address = $gender = "";
 
       if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $first_name = test_input($_POST["firstname"]);
+        $last_name = test_input($_POST["lastname"]);
         $email = test_input($_POST["email"]);
         $password = test_input($_POST["password"]);
-        $encPassword = md5($password);
+        $dob = date('Y-m-d', strtotime($_POST['dob']));
+        $address = test_input($_POST["address"]);
+        $gender = test_input($_POST["gender"]);
 
-        $sql = "SELECT customer_id, first_name, last_name FROM customer WHERE email = '$email' AND password = '$encPassword'";
+        $sql = "SELECT customer_id, first_name, last_name FROM customer WHERE email = '$email'";
         $result = $link->query($sql);
 
         if ($result->num_rows > 0) {
 
-            echo "<script>window.location.href = 'index.php'</script>";
+          echo "already registered";
 
-        //   while($row = mysqli_fetch_assoc($result)) {
-        //     echo "id: " . $row["customer_id"]. " - Name: " . $row["first_name"]. " " . $row["last_name"]. "<br>";
-        //   }
+          // output data of each row
+
+          // while($row = mysqli_fetch_assoc($result)) {
+          //   echo "id: " . $row["customer_id"]. " - Name: " . $row["first_name"]. " " . $row["last_name"]. "<br>";
+          // }
         } else {
-            echo "Password or email incorrect";
+          $encPassword = md5($password);
+          $sql = "INSERT INTO customer (first_name, last_name, dob, gender, email, address, password, account_status)
+VALUES ('$first_name', '$last_name', '$dob', '$gender','$email', '$address','$encPassword', 1);";
+
+          if (mysqli_query($link, $sql)) {
+              //echo "New record created successfully";
+              echo "<script>window.location.href = 'login.php'</script>";
+          } else {
+              echo "Error: " . $sql . "<br>" . mysqli_error($link);
+          }
         }
       }
       function test_input($data)
