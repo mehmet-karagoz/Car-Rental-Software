@@ -10,6 +10,7 @@ var modalText = document.getElementById('modal-text');
 
 function openPayment(params) {
     document.getElementById('payment-card').style.display = "flex";
+    document.getElementById('paymentButton').value = params;
     modal.style.display = "block";
 }
 

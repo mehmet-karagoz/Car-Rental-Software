@@ -1,3 +1,7 @@
+<?php
+// Start the session
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -150,10 +154,14 @@
         $password = test_input($_POST["password"]);
         $encPassword = md5($password);
 
-        $sql = "SELECT customer_id, first_name, last_name FROM customer WHERE email = '$email' AND password = '$encPassword'";
+        $sql = "SELECT * FROM customer WHERE email = '$email' AND password = '$encPassword' AND account_status=1";
         $result = $link->query($sql);
 
         if ($result->num_rows > 0) {
+          $row = mysqli_fetch_assoc($result);
+          $_SESSION["customerId"] = $row["customer_id"];
+          $_SESSION["firstName"] = $row["first_name"];
+          $_SESSION["lastName"] = $row["last_name"];
 
             echo "<script>window.location.href = 'index.php'</script>";
 
