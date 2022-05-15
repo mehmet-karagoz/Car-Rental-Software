@@ -1,3 +1,7 @@
+<?php
+// Start the session
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -66,6 +70,9 @@
         </div>
       </nav>
     </header>
+
+    
+
 
     <!-- Page Content -->
     <div
@@ -218,264 +225,7 @@
     <!-- Cars -->
     <div class="products">
       <div class="container">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="product-item">
-              <img src="../images/product-1-370x270.jpg" alt="" />
-
-              <div class="down-content">
-                <h4>Large: Premium</h4>
-
-                <h6><small>from</small> $99 <small>per weekend</small></h6>
-
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Laborum, aliquam!
-                </p>
-
-                <small>
-                  <strong title="passegengers"
-                    ><i class="fa fa-user"></i> 5</strong
-                  >
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="luggages"
-                    ><i class="fa fa-briefcase"></i> 4</strong
-                  >
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="doors"
-                    ><i class="fa fa-sign-out"></i> 4</strong
-                  >
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="transmission"
-                    ><i class="fa fa-cog"></i> A</strong
-                  >
-                </small>
-
-                <span>
-                  <button
-                    class="btn btn-primary d-block w-100 bookCar bg-dark border-dark"
-                  >
-                    Book now
-                  </button>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="product-item">
-              <img src="../images/product-2-370x270.jpg" alt="" />
-
-              <div class="down-content">
-                <h4>Large: Premium</h4>
-
-                <h6><small>from</small> $99 <small>per weekend</small></h6>
-
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Laborum, aliquam!
-                </p>
-
-                <small>
-                  <strong title="passegengers"
-                    ><i class="fa fa-user"></i> 5</strong
-                  >
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="luggages"
-                    ><i class="fa fa-briefcase"></i> 4</strong
-                  >
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="doors"
-                    ><i class="fa fa-sign-out"></i> 4</strong
-                  >
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="transmission"
-                    ><i class="fa fa-cog"></i> A</strong
-                  >
-                </small>
-
-                <span>
-                  <button
-                    class="btn btn-primary d-block w-100 bookCar bg-dark border-dark"
-                  >
-                    Book now
-                  </button>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="product-item">
-              <img src="../images/product-3-370x270.jpg" alt="" />
-
-              <div class="down-content">
-                <h4>Large: Premium</h4>
-
-                <h6><small>from</small> $99 <small>per weekend</small></h6>
-
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Laborum, aliquam!
-                </p>
-
-                <small>
-                  <strong title="passegengers"
-                    ><i class="fa fa-user"></i> 5</strong
-                  >
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="luggages"
-                    ><i class="fa fa-briefcase"></i> 4</strong
-                  >
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="doors"
-                    ><i class="fa fa-sign-out"></i> 4</strong
-                  >
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="transmission"
-                    ><i class="fa fa-cog"></i> A</strong
-                  >
-                </small>
-
-                <span>
-                  <button
-                    class="btn btn-primary d-block w-100 bookCar bg-dark border-dark"
-                  >
-                    Book now
-                  </button>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="product-item">
-              <img src="../images/product-4-370x270.jpg" alt="" />
-
-              <div class="down-content">
-                <h4>Large: Premium</h4>
-
-                <h6><small>from</small> $99 <small>per weekend</small></h6>
-
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Laborum, aliquam!
-                </p>
-
-                <small>
-                  <strong title="passegengers"
-                    ><i class="fa fa-user"></i> 5</strong
-                  >
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="luggages"
-                    ><i class="fa fa-briefcase"></i> 4</strong
-                  >
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="doors"
-                    ><i class="fa fa-sign-out"></i> 4</strong
-                  >
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="transmission"
-                    ><i class="fa fa-cog"></i> A</strong
-                  >
-                </small>
-
-                <span>
-                  <button
-                    class="btn btn-primary d-block w-100 bookCar bg-dark border-dark"
-                  >
-                    Book now
-                  </button>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="product-item">
-              <img src="../images/product-5-370x270.jpg" alt="" />
-
-              <div class="down-content">
-                <h4>Large: Premium</h4>
-
-                <h6><small>from</small> $99 <small>per weekend</small></h6>
-
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Laborum, aliquam!
-                </p>
-
-                <small>
-                  <strong title="passegengers"
-                    ><i class="fa fa-user"></i> 5</strong
-                  >
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="luggages"
-                    ><i class="fa fa-briefcase"></i> 4</strong
-                  >
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="doors"
-                    ><i class="fa fa-sign-out"></i> 4</strong
-                  >
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="transmission"
-                    ><i class="fa fa-cog"></i> A</strong
-                  >
-                </small>
-
-                <span>
-                  <button
-                    class="btn btn-primary d-block w-100 bookCar bg-dark border-dark"
-                  >
-                    Book now
-                  </button>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4">
-            <div class="product-item">
-              <img src="../images/product-6-370x270.jpg" alt="" />
-
-              <div class="down-content">
-                <h4>Large: Premium</h4>
-
-                <h6><small>from</small> $99 <small>per weekend</small></h6>
-
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Laborum, aliquam!
-                </p>
-
-                <small>
-                  <strong title="passegengers"
-                    ><i class="fa fa-user"></i> 5</strong
-                  >
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="luggages"
-                    ><i class="fa fa-briefcase"></i> 4</strong
-                  >
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="doors"
-                    ><i class="fa fa-sign-out"></i> 4</strong
-                  >
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <strong title="transmission"
-                    ><i class="fa fa-cog"></i> A</strong
-                  >
-                </small>
-
-                <span>
-                  <button
-                    class="btn btn-primary d-block w-100 bookCar bg-dark border-dark"
-                  >
-                    Book now
-                  </button>
-                </span>
-              </div>
-            </div>
-          </div>
+        <div id="cars" class="row">
 
           <div class="col-md-12">
             <ul class="pages">
@@ -491,6 +241,81 @@
         </div>
       </div>
     </div>
+
+    <?php
+    require_once "../config.php";
+      $locations = ["Antalya", "Ankara", "Isparta", "İstanbul"];
+
+      
+        $pick_up_location = $_SESSION["pickup_location"];
+        $return_location = $_SESSION["return_location"];
+        $pick_up_date = $_SESSION["pickup_date"];
+        $return_date = $_SESSION["return_date"];
+        
+        $sql = "SELECT * FROM car WHERE NOT EXISTS (SELECT car_id FROM carbooking cb WHERE $pick_up_date BETWEEN cb.start_date AND cb.end_date)";
+        $result = $link->query($sql);
+        if ($result->num_rows > 0) {
+
+          $html = "";
+          $counterForImage = 1;
+
+          while($row = mysqli_fetch_assoc($result)) {
+            $modelSql = "SELECT * FROM carmodel WHERE model_id=" . $row["model"];
+            $secondResult = $link->query($modelSql);
+            $secondRow = mysqli_fetch_assoc($secondResult); //contains model table
+            $detailSql = "SELECT * FROM cardetail WHERE id=" . $row["car_detail_id"];
+            $thirdResult = $link->query($detailSql);
+            $thirdRow = mysqli_fetch_assoc($thirdResult); //contains car detail table
+
+            $html = $html . "<div class='col-md-4'>\
+            <div class='product-item'>\
+              <img src='../images/product-" . $counterForImage . "-370x270.jpg' alt='' />\
+              <div class='down-content'>\
+                <h4> " . $secondRow["model_name"] . " - " . $secondRow["brand_name"] . "</h4>\
+                <h6><small>from</small> $" . $thirdRow["daily_price"] . " <small>per weekend</small></h6>\
+                <p>" . $row["description"] . "</p>\
+                <small>\
+                  <strong title='passegengers'\
+                    ><i class='fa fa-user'></i> " . $thirdRow["number_of_seat"] . "</strong\
+                  >\
+                  &nbsp;&nbsp;&nbsp;&nbsp;\
+                  <strong title='luggages'\
+                    ><i class='fa fa-briefcase'></i> " . $thirdRow["capacity_of_luggage"] . "</strong\
+                  >\
+                  &nbsp;&nbsp;&nbsp;&nbsp;\
+                  <strong title='doors'\
+                    ><i class='fa fa-sign-out'></i> " . $thirdRow["number_of_door"] . "</strong\
+                  >\
+                  &nbsp;&nbsp;&nbsp;&nbsp;\
+                  <strong title='transmission'\
+                    ><i class='fa fa-cog'></i> " . $thirdRow["gear_type"] . "</strong\
+                  >\
+                </small>\
+                <span>\
+                  <button\
+                    class='btn btn-primary d-block w-100 bookCar bg-dark border-dark'\
+                  >\
+                    Book now\
+                  </button>\
+                </span>\
+              </div>\
+            </div>\
+          </div>";
+          $counterForImage = $counterForImage + 1;
+          }
+          echo "<script>document.getElementById(\"cars\").innerHTML=\"" . $html . "\"; </script>";
+        } else {
+            echo "There is no available car.";
+        }
+      
+      function test_input($data)
+      {
+          $data = trim($data);
+          $data = stripslashes($data);
+          $data = htmlspecialchars($data);
+          return $data;
+      }
+    ?>
 
     <!-- Footer -->
     <footer>

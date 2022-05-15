@@ -1,3 +1,7 @@
+<?php
+// Start the session
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -48,10 +52,6 @@
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="reservation.php">Reservation</a>
-              </li>
-
-              <li class="nav-item">
                 <a class="nav-link" href="about-us.php">About Us</a>
               </li>
 
@@ -76,12 +76,12 @@
         </div>
         <div class="card" id="formCard">
           <div class="card-body">
-            <form action="reservation.php" method="get">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
               <h5>PICK UP</h5>
               <div class="dropdown">
                 <i class="fa-solid fa-location-dot"></i>
                 <select name="pick-up-location" id="location">
-                  <option value="d" selected>Antalya</option>
+                  <option value="0" selected>Antalya</option>
                   <option value="1">Ankara</option>
                   <option value="2">Isparta</option>
                   <option value="3">İstanbul</option>
@@ -100,7 +100,7 @@
                 </label>
               </div>
               <div class="pick-up-date">
-                <input type="date" name="pick-up" id="pick-up" required />
+                <input type="date" name="pick-up-date" id="pick-up" required />
               </div>
               <h5 style="color: aliceblue">RETURN</h5>
               <div
@@ -110,14 +110,14 @@
               >
                 <i class="fa-solid fa-location-dot"></i>
                 <select name="return-location" id="location">
-                  <option value="d" selected>Antalya</option>
+                  <option value="0" selected>Antalya</option>
                   <option value="1">Ankara</option>
                   <option value="2">Isparta</option>
                   <option value="3">İstanbul</option>
                 </select>
               </div>
               <div class="return-date">
-                <input type="date" name="return" id="return" required />
+                <input type="date" name="return-date" id="return" required />
               </div>
               <button
                 class="btn btn-primary d-block w-100"
@@ -393,6 +393,27 @@
         </div>
       </div>
     </div>
+
+    <?php
+    require_once "../config.php";
+      $locations = ["Antalya", "Ankara", "Isparta", "İstanbul"];
+
+      if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $_SESSION["pickup_location"] = test_input($_POST["pick-up-location"]);
+        $_SESSION["return_location"] = test_input($_POST["return-location"]);
+        $_SESSION["pickup_date"] = test_input($_POST["pick-up-date"]);
+        $_SESSION["return_date"] = test_input($_POST["return-date"]);
+        
+        echo "<script>window.location.href = 'reservation.php' </script>";
+      }
+      function test_input($data)
+      {
+          $data = trim($data);
+          $data = stripslashes($data);
+          $data = htmlspecialchars($data);
+          return $data;
+      }
+    ?>
 
     <!-- Footer -->
     <footer>
