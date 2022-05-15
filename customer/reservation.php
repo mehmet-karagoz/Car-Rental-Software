@@ -96,75 +96,6 @@ session_start();
       <!-- Modal Content -->
       <div class="modal-content">
         <div class="container p-0" id="modal-text">
-          <div class="card" id="address-card">
-            <h4 class="text-center fw-bold">Address Details</h4>
-            <form action="" method="get">
-              <div class="row">
-                <div class="col-12">
-                  <div class="d-flex flex-column">
-                    <h5 class="text mb-1">Pick-up</h5>
-                    <div class="dropdown">
-                      <select name="pick-up-location" id="p-location">
-                        <option value="d" selected>Antalya</option>
-                        <option value="1">Ankara</option>
-                        <option value="2">Isparta</option>
-                        <option value="3">İstanbul</option>
-                      </select>
-                    </div>
-                    <div class="form-check">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        value=""
-                        id="flexCheckChecked"
-                        checked
-                      />
-                      <label class="form-check-label" for="flexCheckChecked">
-                        Return to the same location
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="d-flex flex-column">
-                    <div class="pick-up-date">
-                      <input type="date" name="pick-up" id="pick-up" required />
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="d-flex flex-column">
-                    <h5 class="text mb-1">Return</h5>
-                    <div class="dropdown" style="display: none">
-                      <select name="return-location" id="r-location">
-                        <option value="d" selected>Antalya</option>
-                        <option value="1">Ankara</option>
-                        <option value="2">Isparta</option>
-                        <option value="3">İstanbul</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="d-flex flex-column">
-                    <div class="return-date mt-2">
-                      <input type="date" name="return" id="return" required />
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <button
-                    onclick="openPayment();"
-                    class="btn btn-primary d-block w-100 h-75 mb-3"
-                    type="submit"
-                    id="find-vehicle"
-                  >
-                    Find a vehicle<i class="fa fa-arrow-right"></i>
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
           <div class="card" id="payment-card">
             <h4 class="text-center fw-bold">Payment Details</h4>
             <div class="row">
@@ -293,6 +224,7 @@ session_start();
                 </small>\
                 <span>\
                   <button\
+                    onclick='openPayment();'\
                     class='btn btn-primary d-block w-100 bookCar bg-dark border-dark'\
                   >\
                     Book now\
