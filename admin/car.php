@@ -81,7 +81,7 @@
     <!-- Cars -->
     <div class="products">
       <div class="container">
-        <div class="row">
+        <div id="cars" class="row">
           <div class="col-md-4">
             <div class="product-item">
               <img src="../images/product-1-370x270.jpg" alt="" />
@@ -360,6 +360,66 @@
         </div>
       </div>
     </div>
+
+    <?php
+    require_once "../config.php";
+    $sql = "SELECT * FROM car";
+    $result = $link->query($sql);
+    if ($result->num_rows > 0) {
+
+      $html = "";
+      $counterForImage = 1;
+
+      while($row = mysqli_fetch_assoc($result)) {
+        $modelSql = "SELECT * FROM carmodel WHERE model_id=" . $row["model"];
+        $secondResult = $link->query($modelSql);
+        $secondRow = mysqli_fetch_assoc($secondResult); //contains model table
+        $detailSql = "SELECT * FROM cardetail WHERE id=" . $row["car_detail_id"];
+        $thirdResult = $link->query($detailSql);
+        $thirdRow = mysqli_fetch_assoc($thirdResult); //contains car detail table
+
+        $html = $html . "<div class='col-md-4'>\
+        <div class='product-item'>\
+          <img src='../images/product-" . $counterForImage . "-370x270.jpg' alt='' />\
+          <div class='down-content'>\
+            <h4> " . $secondRow["model_name"] . " - " . $secondRow["brand_name"] . "</h4>\
+            <h6 id='price'><small>from</small> $" . $thirdRow["daily_price"] . " <small>per weekend</small></h6>\
+            <p>" . $row["description"] . "</p>\
+            <small>\
+              <strong title='passegengers'\
+                ><i class='fa fa-user'></i> " . $thirdRow["number_of_seat"] . "</strong\
+              >\
+              &nbsp;&nbsp;&nbsp;&nbsp;\
+              <strong title='luggages'\
+                ><i class='fa fa-briefcase'></i> " . $thirdRow["capacity_of_luggage"] . "</strong\
+              >\
+              &nbsp;&nbsp;&nbsp;&nbsp;\
+              <strong title='doors'\
+                ><i class='fa fa-sign-out'></i> " . $thirdRow["number_of_door"] . "</strong\
+              >\
+              &nbsp;&nbsp;&nbsp;&nbsp;\
+              <strong title='transmission'\
+                ><i class='fa fa-cog'></i> " . $thirdRow["gear_type"] . "</strong\
+              >\
+            </small>\
+            <span>\
+                  <a\
+                    class='btn btn-primary d-block w-100 bookCar text-white bg-dark border-dark'\
+                    href='car-detail.php?carid=" . $row["car_id"] . "'\
+                  >\
+                    Edit\
+                  </a>\
+            </span>\
+          </div>\
+        </div>\
+      </div>";
+      $counterForImage = $counterForImage + 1;
+      }
+      echo "<script>document.getElementById(\"cars\").innerHTML=\"" . $html . "\"; </script>";
+    } else {
+        echo "There is no available car.";
+    }
+    ?>
 
     <!-- Footer -->
     <footer>
