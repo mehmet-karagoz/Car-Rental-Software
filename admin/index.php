@@ -73,20 +73,45 @@
     </header>
     <br /><br /><br /><br /><br />
 
+    <?php
+      require_once "../config.php";
+
+      $carSql = "SELECT COUNT(*) as car_num FROM car";
+      $reservationSql = "SELECT COUNT(*) as rent_num FROM rent";
+      $userSql = "SELECT COUNT(*) as user_num FROM customer";
+      $incomeSql = "SELECT SUM(amount) as income_num FROM invoice";
+
+      $result = $link->query($carSql);
+      $row = mysqli_fetch_assoc($result);
+      $carNumber = $row["car_num"];
+
+      $result = $link->query($reservationSql);
+      $row = mysqli_fetch_assoc($result);
+      $reservationNumber = $row["rent_num"];
+
+      $result = $link->query($userSql);
+      $row = mysqli_fetch_assoc($result);
+      $userNumber = $row["user_num"];
+
+      $result = $link->query($incomeSql);
+      $row = mysqli_fetch_assoc($result);
+      $incomeNumber = $row["income_num"];
+    ?>
+
     <div class="container">
       <div class="row">
         <div class="col-md-3">
           <div class="card-counter primary">
             <i class="fa fa-code-fork"></i>
-            <span class="count-numbers">12</span>
-            <span class="count-name">Locations</span>
+            <span class="count-numbers"><?php echo $carNumber ?></span>
+            <span class="count-name">Cars</span>
           </div>
         </div>
 
         <div class="col-md-3">
           <div class="card-counter danger">
             <i class="fa fa-ticket"></i>
-            <span class="count-numbers">599</span>
+            <span class="count-numbers"><?php echo $reservationNumber ?></span>
             <span class="count-name">Reservations</span>
           </div>
         </div>
@@ -94,7 +119,7 @@
         <div class="col-md-3">
           <div class="card-counter success">
             <i class="fa fa-database"></i>
-            <span class="count-numbers">$6875</span>
+            <span class="count-numbers">$<?php echo $incomeNumber ?></span>
             <span class="count-name">Income</span>
           </div>
         </div>
@@ -102,7 +127,7 @@
         <div class="col-md-3">
           <div class="card-counter info">
             <i class="fa fa-users"></i>
-            <span class="count-numbers">35</span>
+            <span class="count-numbers"><?php echo $userNumber ?></span>
             <span class="count-name">Users</span>
           </div>
         </div>
@@ -121,88 +146,75 @@
             <th>Amount</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>
-              <div class="d-flex flex-row flex-nowrap">
-                <!--div as flexbox with content in a row without wrap-->
-                <div class="img img-responsive me-4">
-                  <!--responsive img inside div-->
-                  <img
-                    class="img img-fluid"
-                    src="../images/team_04.jpg"
-                    width="50"
-                    height="50"
-                    alt=""
-                  />
-                </div>
-                <p>Anna</p>
-              </div>
-            </td>
-            <td>BMW</td>
-            <td>
-              <div class="status">
-                <p id="done">Done</p>
-              </div>
-            </td>
-            <td>20 Sep 2020</td>
-            <td>$2000</td>
-          </tr>
-          <tr>
-            <td>
-              <div class="d-flex flex-row flex-nowrap">
-                <!--div as flexbox with content in a row without wrap-->
-                <div class="img img-responsive me-4">
-                  <!--responsive img inside div-->
-                  <img
-                    class="img img-fluid"
-                    src="../images/team_04.jpg"
-                    width="50"
-                    height="50"
-                    alt=""
-                  />
-                </div>
-                <p>Anna</p>
-              </div>
-            </td>
-            <td>BMW</td>
-            <td>
-              <div class="status">
-                <p id="progress">Progress</p>
-              </div>
-            </td>
-            <td>20 Sep 2020</td>
-            <td>$2000</td>
-          </tr>
-          <tr>
-            <td>
-              <div class="d-flex flex-row flex-nowrap">
-                <!--div as flexbox with content in a row without wrap-->
-                <div class="img img-responsive me-4">
-                  <!--responsive img inside div-->
-                  <img
-                    class="img img-fluid"
-                    src="../images/team_04.jpg"
-                    width="50"
-                    height="50"
-                    alt=""
-                  />
-                </div>
-                <p>Anna</p>
-              </div>
-            </td>
-            <td>BMW</td>
-            <td>
-              <div class="status">
-                <p id="done">Done</p>
-              </div>
-            </td>
-            <td>20 Sep 2020</td>
-            <td>$2000</td>
-          </tr>
+        <tbody id="recentBooking">
+          
         </tbody>
       </table>
     </div>
+
+    <?php 
+      $tableHtml = "";
+      $carBookingSql = "SELECT car_id, rent_id FROM carbooking";
+      $result = $link->query($carBookingSql);
+      while($row = mysqli_fetch_assoc($result)) {
+        $carSql = "SELECT model FROM car WHERE car_id=" . $row["car_id"];
+        $carResult = $link->query($carSql);
+        $carRow = mysqli_fetch_assoc($carResult);
+        $modelSql = "SELECT model_name FROM carmodel WHERE model_id=" . $carRow["model"];
+        $modelResult = $link->query($modelSql);
+        $modelRow = mysqli_fetch_assoc($modelResult);
+
+        $modelName = $modelRow["model_name"];
+
+        $rentSql = "SELECT customer_id, invoice_id FROM rent WHERE rent_id=" . $row["rent_id"];
+        $rentResult = $link->query($rentSql);
+        $rentRow = mysqli_fetch_assoc($rentResult);
+        $customerSql = "SELECT first_name, last_name FROM customer WHERE customer_id=" . $rentRow["customer_id"];
+        $customerResult = $link->query($customerSql);
+        $customerRow = mysqli_fetch_assoc($customerResult);
+
+        $booking = $customerRow["first_name"] . " " . $customerRow["last_name"];
+
+        $invoiceSql = "SELECT * FROM invoice WHERE invoice_id=" . $rentRow["invoice_id"];
+        $invoiceResult = $link->query($invoiceSql);
+        $invoiceRow = mysqli_fetch_assoc($invoiceResult);
+
+        $date = $invoiceRow["payment_date"];
+        $amount = $invoiceRow["amount"];
+
+        $tableHtml = $tableHtml . "<tr>\
+        <td>\
+          <div class='d-flex flex-row flex-nowrap'>\
+            <!--div as flexbox with content in a row without wrap-->\
+            <div class='img img-responsive me-4'>\
+              <!--responsive img inside div-->\
+              <img\
+                class='img img-fluid'\
+                src='../images/team_04.jpg'\
+                width='50'\
+                height='50'\
+                alt=''\
+              />\
+            </div>\
+            <p>" . $booking . "</p>\
+          </div>\
+        </td>\
+        <td>" . $modelName . "</td>\
+        <td>\
+          <div class='status'>\
+            <p id='done'>Done</p>\
+          </div>\
+        </td>\
+        <td>" . $date . "</td>\
+        <td>$" . $amount . "</td>\
+      </tr>";
+
+      }
+      echo "<script>document.getElementById(\"recentBooking\").innerHTML=\"" . $tableHtml . "\"; </script>";
+
+    ?>
+
+    
 
     <!-- Footer -->
     <footer>
