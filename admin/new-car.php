@@ -129,37 +129,45 @@
                   <h4 style="text-align: center">Add New Car</h4>
                 </div>
               </div>
+              <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
               <div class="row">
                 <div class="col-12">
                   <div class="d-flex flex-column">
-                    <p class="text mb-1">Company Name</p>
+                    <p class="text mb-1">Brand Name</p>
                     <input
+                      name="brandName"
                       class="form-control mb-3"
                       type="text"
                       placeholder="Company Name"
                       value="Volkswagen"
+                      required
                     />
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="d-flex flex-column">
-                    <p class="text mb-1">Type</p>
+                    <p class="text mb-1">Model Name</p>
                     <input
+                      name="modelName"
                       class="form-control mb-3"
                       type="text"
-                      placeholder="Premium"
-                      value="Premium"
+                      placeholder="Passat"
+                      value="Passat"
+                      required
                     />
                   </div>
                 </div>
                 <div class="col-8">
                   <div class="d-flex flex-column">
-                    <p class="text mb-1">Owner Name</p>
+                    <p class="text mb-1">Description</p>
                     <input
+                      name="description"
                       class="form-control mb-3"
                       type="text"
                       placeholder="Vali Efml"
-                      value="Anna Sarfv"
+                      value="Lorem ipsum dolar"
+                      required
+                      
                     />
                   </div>
                 </div>
@@ -167,15 +175,70 @@
                   <div class="d-flex flex-column">
                     <p class="text mb-1">Price</p>
                     <input
+                      name="price"
                       class="form-control mb-3 pt-2"
                       type="text"
                       placeholder="$232"
-                      value="$3400"
+                      value="3400"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="d-flex flex-column">
+                    <p class="text mb-1">Number Of Seat</p>
+                    <input
+                      name="numOfSeat"
+                      class="form-control mb-3 pt-2"
+                      type="text"
+                      placeholder="4"
+                      value="4"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="d-flex flex-column">
+                    <p class="text mb-1">Number Of Doors</p>
+                    <input
+                    name="numOfDoor"
+                      class="form-control mb-3 pt-2"
+                      type="text"
+                      placeholder="2"
+                      value="2"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="d-flex flex-column">
+                    <p class="text mb-1">Capacity Of Luggage</p>
+                    <input
+                      name="capOfLuggage"
+                      class="form-control mb-3 pt-2"
+                      type="text"
+                      placeholder="100"
+                      value="100"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="d-flex flex-column">
+                    <p class="text mb-1">Gear Type</p>
+                    <input
+                      name="gearType"
+                      class="form-control mb-3 pt-2"
+                      type="text"
+                      placeholder="Manual"
+                      value="Manual"
+                      required
                     />
                   </div>
                 </div>
                 <div class="col-12">
                   <button
+                    name="addCar"
                     class="btn btn-primary bg-success text-center d-block w-100 m-auto"
                     onclick="showAlert();"
                   >
@@ -183,11 +246,44 @@
                   </button>
                 </div>
               </div>
+              </form>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+    <?php
+    require_once "../config.php";
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+      $brandName = $_POST["brandName"];
+      $modelName = $_POST["modelName"];
+      $description = $_POST["description"];
+      $price = $_POST["price"];
+      $numOfSeat = $_POST["numOfSeat"];
+      $numOfDoors = $_POST["numOfDoor"];
+      $capOfLuggage = $_POST["capOfLuggage"];
+      $gearType = $_POST["gearType"];
+
+      $detailSql = "INSERT INTO cardetail (number_of_seat, number_of_door, capacity_of_luggage, gear_type, daily_price) VALUES ($numOfSeat, $numOfDoors, $capOfLuggage, '$gearType', $price)";
+      if (mysqli_query($link, $detailSql)) {
+        $detail_id = mysqli_insert_id($link);
+
+        $modelSql = "INSERT INTO carmodel (model_name, brand_name) VALUES ('$modelName','$brandName')";
+        if (mysqli_query($link, $modelSql)) {
+          $model_id = mysqli_insert_id($link);
+
+          $carSql = "INSERT INTO car (model,car_detail_id, description) VALUES ($model_id,$detail_id,'$description')";
+          if (mysqli_query($link, $carSql)) {
+            echo "<script> alert('Successfully added.'); </script>";
+          }
+        }
+
+      }
+    }
+    ?>
 
     <!-- Footer -->
     <footer>
