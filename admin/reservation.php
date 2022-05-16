@@ -86,136 +86,8 @@
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>
-              <div class="d-flex flex-row flex-nowrap">
-                <!--div as flexbox with content in a row without wrap-->
-                <div class="img img-responsive me-4">
-                  <!--responsive img inside div-->
-                  <img
-                    class="img img-fluid"
-                    src="../images/team_04.jpg"
-                    width="50"
-                    height="50"
-                    alt=""
-                  />
-                </div>
-                <p>Anna</p>
-              </div>
-            </td>
-            <td>BMW</td>
-            <td>
-              <div class="status">
-                <p id="done">Done</p>
-              </div>
-            </td>
-            <td>20 Sep 2020</td>
-            <td>$2000</td>
-            <td>
-              <button
-                type="button"
-                class="btn btn-outline-danger"
-                onclick="deleteRow(this);"
-              >
-                Delete
-              </button>
-              <button
-                type="button"
-                class="btn btn-outline-info"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-              >
-                Info
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="d-flex flex-row flex-nowrap">
-                <!--div as flexbox with content in a row without wrap-->
-                <div class="img img-responsive me-4">
-                  <!--responsive img inside div-->
-                  <img
-                    class="img img-fluid"
-                    src="../images/team_04.jpg"
-                    width="50"
-                    height="50"
-                    alt=""
-                  />
-                </div>
-                <p>Anna</p>
-              </div>
-            </td>
-            <td>BMW</td>
-            <td>
-              <div class="status">
-                <p id="progress">Progress</p>
-              </div>
-            </td>
-            <td>20 Sep 2020</td>
-            <td>$2000</td>
-            <td>
-              <button
-                type="button"
-                class="btn btn-outline-danger"
-                onclick="deleteRow(this);"
-              >
-                Delete
-              </button>
-              <button
-                type="button"
-                class="btn btn-outline-info"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-              >
-                Info
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="d-flex flex-row flex-nowrap">
-                <!--div as flexbox with content in a row without wrap-->
-                <div class="img img-responsive me-4">
-                  <!--responsive img inside div-->
-                  <img
-                    class="img img-fluid"
-                    src="../images/team_04.jpg"
-                    width="50"
-                    height="50"
-                    alt=""
-                  />
-                </div>
-                <p>Anna</p>
-              </div>
-            </td>
-            <td>BMW</td>
-            <td>
-              <div class="status">
-                <p id="done">Done</p>
-              </div>
-            </td>
-            <td>20 Sep 2020</td>
-            <td>$2000</td>
-            <td>
-              <button
-                type="button"
-                class="btn btn-outline-danger"
-                onclick="deleteRow(this);"
-              >
-                Delete
-              </button>
-              <button
-                type="button"
-                class="btn btn-outline-info"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-              >
-                Info
-              </button>
-            </td>
-          </tr>
+        <tbody id="recentBooking">
+          
         </tbody>
       </table>
     </div>
@@ -273,6 +145,91 @@
         </div>
       </div>
     </div>
+
+    <?php 
+      require_once "../config.php";
+      $tableHtml = "";
+      $carBookingSql = "SELECT car_id, rent_id FROM carbooking";
+      $result = $link->query($carBookingSql);
+      while($row = mysqli_fetch_assoc($result)) {
+        $carSql = "SELECT model FROM car WHERE car_id=" . $row["car_id"];
+        $carResult = $link->query($carSql);
+        $carRow = mysqli_fetch_assoc($carResult);
+        $modelSql = "SELECT model_name FROM carmodel WHERE model_id=" . $carRow["model"];
+        $modelResult = $link->query($modelSql);
+        $modelRow = mysqli_fetch_assoc($modelResult);
+
+        $modelName = $modelRow["model_name"];
+
+        $rentSql = "SELECT * FROM rent WHERE rent_id=" . $row["rent_id"];
+        $rentResult = $link->query($rentSql);
+        $rentRow = mysqli_fetch_assoc($rentResult);
+        $customerSql = "SELECT first_name, last_name FROM customer WHERE customer_id=" . $rentRow["customer_id"];
+        $customerResult = $link->query($customerSql);
+        $customerRow = mysqli_fetch_assoc($customerResult);
+
+        $booking = $customerRow["first_name"] . " " . $customerRow["last_name"];
+
+        $invoiceSql = "SELECT * FROM invoice WHERE invoice_id=" . $rentRow["invoice_id"];
+        $invoiceResult = $link->query($invoiceSql);
+        $invoiceRow = mysqli_fetch_assoc($invoiceResult);
+
+        $date = $invoiceRow["payment_date"];
+        $amount = $invoiceRow["amount"];
+
+        $tableHtml = $tableHtml . "<tr>\
+        <td>\
+          <div class='d-flex flex-row flex-nowrap'>\
+            <!--div as flexbox with content in a row without wrap-->\
+            <div class='img img-responsive me-4'>\
+              <!--responsive img inside div-->\
+              <img\
+                class='img img-fluid'\
+                src='../images/team_04.jpg'\
+                width='50'\
+                height='50'\
+                alt=''\
+              />\
+            </div>\
+            <p>" . $booking . "</p>\
+          </div>\
+        </td>\
+        <td>" . $modelName . "</td>\
+        <td>\
+          <div class='status'>\
+            <p id='done'>Done</p>\
+          </div>\
+        </td>\
+        <td>" . $date . "</td>\
+        <td>$" . $amount . "</td>\
+        <td>\
+              <form>\
+              <button\
+                value='" . $rentRow["rent_id"] . "'\
+                name='delete'\
+                type='submit'\
+                class='btn btn-outline-danger'\
+                onclick='deleteRow(this);'\
+              >\
+                Delete\
+              </button>\
+              </form>\
+            </td>\
+      </tr>";
+
+      }
+      echo "<script>document.getElementById(\"recentBooking\").innerHTML=\"" . $tableHtml . "\"; </script>";
+
+      if(isset($_GET["delete"])) {
+        $deleteSql = "DELETE FROM rent WHERE rent_id=" . $_GET["delete"];
+        if (mysqli_query($link, $deleteSql)) {
+          echo "<script> alert('DELETED SUCCESSFULLY'); </script>";
+        } else {
+          echo "Error deleting record: " . mysqli_error($link);
+        }
+      }
+    ?>
+
 
     <!-- Footer -->
     <footer>
