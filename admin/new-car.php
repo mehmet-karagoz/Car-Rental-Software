@@ -117,11 +117,7 @@
                 class="img-fluid"
                 alt=""
               />
-              <button
-                class="btn btn-primary bg-info text-center d-block w-100 m-auto"
-              >
-                Upload image
-              </button>
+                          
             </div>
             <div class="col-md-8">
               <div class="row">
@@ -131,6 +127,17 @@
               </div>
               <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
               <div class="row">
+              <div class="col-12">
+                  <div class="d-flex flex-column">
+                    <p class="text mb-1">Image Link</p>
+                    <input
+                      name="img_link"
+                      class="form-control mb-3"
+                      type="text"
+                      required
+                    />
+                  </div>
+                </div>
                 <div class="col-12">
                   <div class="d-flex flex-column">
                     <p class="text mb-1">Brand Name</p>
@@ -257,7 +264,7 @@
     require_once "../config.php";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
+      $imageLink = $_POST["img_link"];
       $brandName = $_POST["brandName"];
       $modelName = $_POST["modelName"];
       $description = $_POST["description"];
@@ -271,7 +278,7 @@
       if (mysqli_query($link, $detailSql)) {
         $detail_id = mysqli_insert_id($link);
 
-        $modelSql = "INSERT INTO carmodel (model_name, brand_name) VALUES ('$modelName','$brandName')";
+        $modelSql = "INSERT INTO carmodel (model_name, brand_name, img_link) VALUES ('$modelName','$brandName','$imageLink')";
         if (mysqli_query($link, $modelSql)) {
           $model_id = mysqli_insert_id($link);
 

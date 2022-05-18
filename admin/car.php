@@ -380,7 +380,7 @@
 
         $html = $html . "<div class='col-md-4'>\
         <div class='product-item'>\
-          <img src='../images/product-" . $counterForImage . "-370x270.jpg' alt='' />\
+        <img src='" . $secondRow["img_link"] . "' alt='' />\
           <div class='down-content'>\
             <h4> " . $secondRow["model_name"] . " - " . $secondRow["brand_name"] . "</h4>\
             <h6 id='price'><small>from</small> $" . $thirdRow["daily_price"] . " <small>per weekend</small></h6>\
