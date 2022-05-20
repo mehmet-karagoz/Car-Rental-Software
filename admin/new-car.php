@@ -247,7 +247,6 @@
                   <button
                     name="addCar"
                     class="btn btn-primary bg-success text-center d-block w-100 m-auto"
-                    onclick="showAlert();"
                   >
                     Add New Car
                   </button>
@@ -284,7 +283,7 @@
 
           $carSql = "INSERT INTO car (model,car_detail_id, description) VALUES ($model_id,$detail_id,'$description')";
           if (mysqli_query($link, $carSql)) {
-            echo "<script> alert('Successfully added.'); </script>";
+            echo "<script> window.location.href='car.php'; </script>";
           }
         }
 

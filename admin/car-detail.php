@@ -1,3 +1,7 @@
+<?php
+// Start the session
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -135,11 +139,52 @@
         data-bs-dismiss="alert"
         aria-label="Close"
       ></button>
+
+      <?php
+    require_once "../config.php";
+    $carid = $modelId = $detailId = "";
+      $modelName = $brandName = $price = "";
+
+    if($_SERVER["REQUEST_METHOD"] == "GET") {
+      
+      $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+      $parts = parse_url($url);
+      parse_str($parts['query'], $query);
+      $carid =  $query['carid'];
+      $_SESSION["carId"] = $carid;
+      $sql = "SELECT * from car where car_id=". $carid;
+      $result = $link->query($sql);
+      $row = mysqli_fetch_assoc($result);
+
+      $detailId = $row["car_detail_id"];
+      $_SESSION["detailId"] = $detailId;
+
+      $detailSql =  "SELECT * FROM cardetail WHERE id=" . $detailId;
+      $detailResult = $link->query($detailSql);
+      $detailRow = mysqli_fetch_assoc($detailResult);
+      
+      $modelId = $row["model"];
+      $_SESSION["modelId"] = $modelId;
+      
+      $modelSql =  "SELECT * FROM carmodel WHERE model_id=" . $modelId;
+      $modelResult = $link->query($modelSql);
+      $modelRow = mysqli_fetch_assoc($modelResult);
+      $img = $modelRow["img_link"];
+
+      $modelName = $modelRow["model_name"];
+      $brandName = $modelRow["brand_name"];
+      $price = $detailRow["daily_price"];
+
+
+    }
+    ?>
+      
     </div>
     <div class="container-md overflow-hidden">
+      <form name="saveChanges" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
       <div class="row">
         <div class="col-md-4">
-          <img src="../images/product-1-370x270.jpg" class="img-fluid" alt="" />
+          <img src="<?php echo $img ?>" class="img-fluid" alt="" />
         </div>
         <div class="col-md-8">
           <div class="row">
@@ -147,63 +192,55 @@
               <h4 style="text-align: center">Car Details</h4>
             </div>
             <div class="col-4">
-              <a
+            <button
                 class="btn btn-primary bg-danger text-center d-block w-100 m-auto"
-                onclick="showAlertDanger();"
+                type="submit"
+                name="delete"
               >
                 Delete
-              </a>
+              </button>
             </div>
           </div>
           <div class="row">
             <div class="col-12">
               <div class="d-flex flex-column">
-                <p class="text mb-1">Company Name</p>
+                <p class="text mb-1">Brand Name</p>
                 <input
                   class="form-control mb-3"
                   type="text"
-                  placeholder="Company Name"
-                  value="Volkswagen"
+                  name="brandName"
+                  value="<?php echo $brandName ?>"
                 />
               </div>
             </div>
             <div class="col-12">
               <div class="d-flex flex-column">
-                <p class="text mb-1">Type</p>
+                <p class="text mb-1">Model Name</p>
                 <input
                   class="form-control mb-3"
                   type="text"
-                  placeholder="Premium"
-                  value="Premium"
+                  name="modelName"
+                  value="<?php echo $modelName ?>"
                 />
               </div>
             </div>
-            <div class="col-8">
-              <div class="d-flex flex-column">
-                <p class="text mb-1">Owner Name</p>
-                <input
-                  class="form-control mb-3"
-                  type="text"
-                  placeholder="Vali Efml"
-                  value="Anna Sarfv"
-                />
-              </div>
-            </div>
+            
             <div class="col-4">
               <div class="d-flex flex-column">
                 <p class="text mb-1">Price</p>
                 <input
                   class="form-control mb-3 pt-2"
                   type="text"
-                  placeholder="$232"
-                  value="$3400"
+                  name="price"
+                  value="<?php echo $price ?>"
                 />
               </div>
             </div>
             <div class="col-12">
               <button
                 class="btn btn-primary bg-success text-center d-block w-100 m-auto"
-                onclick="showAlert();"
+                type="submit"
+                name="saveChanges"
               >
                 Save Changes
               </button>
@@ -211,7 +248,40 @@
           </div>
         </div>
       </div>
+      </form>
     </div>
+
+   
+     
+    <?php
+    require_once "../config.php";
+      if (isset($_POST["saveChanges"])) {
+
+        $newModel = $_POST["modelName"];
+        $newBrand = $_POST["brandName"];
+        $newPrice = $_POST["price"];
+
+        $updateModelSql = "UPDATE carmodel SET model_name='" . $newModel . "', brand_name='". $newBrand . "' WHERE model_id=" . $_SESSION["modelId"];
+        $updateDetailSql = "UPDATE cardetail SET daily_price=". $newPrice. " WHERE id=" . $_SESSION["detailId"];
+        
+        if (mysqli_query($link, $updateModelSql)) {
+          if (mysqli_query($link, $updateDetailSql)) {
+
+            echo "<script> window.location.href='car.php'</script>";
+
+          }
+        }
+      } 
+      if (isset($_POST["delete"])) {
+        $carid = $_SESSION["carId"];
+        $deleteSql = "DELETE FROM car WHERE car_id=".$carid;
+        var_dump($deleteSql);
+        if (mysqli_query($link, $deleteSql)) {
+          echo "<script> window.location.href='car.php';</script>";
+        }
+      }
+      
+    ?>
 
     <!-- Footer -->
     <footer>
