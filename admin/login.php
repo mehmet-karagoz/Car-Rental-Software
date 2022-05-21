@@ -75,7 +75,7 @@
 
     <div class="card mt-5 p-3 w-auto" id="login-card">
         <h4 class="text-center fw-bold">Login</h4>
-        <form action="index.php" method="get">
+        <form name="login" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
           <div class="row">
             <div class="col-12">
               <div class="d-flex flex-column">
@@ -84,6 +84,7 @@
                   class="form-control mb-3"
                   type="text"
                   placeholder="Email"
+                  name="email"
                   required
                 />
               </div>
@@ -93,8 +94,9 @@
                 <p class="text mb-1">Password</p>
                 <input
                   class="form-control mb-3"
-                  type="text"
+                  type="password"
                   placeholder="Password"
+                  name="password"
                   required
                 />
               </div>
@@ -104,7 +106,7 @@
                 class="btn btn-primary bg-danger border-dark d-block w-100 h-75 mb-3"
                 type="submit"
                 id="login"
-                onclick="location.href = '/admin/index.php';"
+                name="login"
               >
                 Login
               </button>
@@ -114,6 +116,26 @@
         </form>
       </div>
     </div>
+
+    <?php 
+      require_once "../config.php";
+
+      if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $email = $_POST["email"];
+      $password = $_POST["password"];
+      $encPassword = md5($password);
+
+      $loginSql = "SELECT * FROM admin WHERE email='" . $email . "' AND password='" . $encPassword . "'";
+      $result = $link->query($loginSql);
+
+        if ($result->num_rows > 0) {
+          echo "<script>window.location.href='index.php'; </script>";
+        }else {
+          echo "<script>alert('Wrong password or email'); </script>";
+        }
+      }
+    ?>
+
     <!-- Footer -->
     <footer>
       <div class="container">
