@@ -52,10 +52,6 @@ session_start();
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="reservation.php">Reservation</a>
-              </li>
-
-              <li class="nav-item">
                 <a class="nav-link" href="about-us.php">About Us</a>
               </li>
 

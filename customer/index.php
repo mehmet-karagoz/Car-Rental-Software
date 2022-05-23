@@ -91,6 +91,7 @@ session_start();
                 <input
                   class="form-check-input"
                   type="checkbox"
+                  name="checkbox"
                   value=""
                   id="flexCheckChecked"
                   checked
@@ -400,7 +401,12 @@ session_start();
 
       if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["pickup_location"] = test_input($_POST["pick-up-location"]);
-        $_SESSION["return_location"] = test_input($_POST["return-location"]);
+        if (isset($_POST["checkbox"])) {
+          $_SESSION["return_location"] = test_input($_POST["pick-up-location"]);
+        } else {
+          $_SESSION["return_location"] = test_input($_POST["return-location"]);
+
+        }
         $_SESSION["pickup_date"] = test_input($_POST["pick-up-date"]);
         $_SESSION["return_date"] = test_input($_POST["return-date"]);
         

@@ -288,7 +288,7 @@ session_start();
             $carBookingSql = "INSERT INTO carbooking (car_id, start_date, end_date, rent_id) VALUES ($car_id, '$pick_up_date', '$return_date', $rentId)";
             if (mysqli_query($link, $carBookingSql)) {
 
-              echo '<script>alert("Successfully booking ' . $personName . '")</script>';
+              echo '<script>alert("Successfully booking ' . $personName . '");window.location.href="index.php";</script>';
             }
           }
         }
