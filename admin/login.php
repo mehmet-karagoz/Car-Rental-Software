@@ -1,3 +1,7 @@
+<?php
+// Start the session
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -129,6 +133,8 @@
       $result = $link->query($loginSql);
 
         if ($result->num_rows > 0) {
+          $row = mysqli_fetch_assoc($result);
+          $_SESSION["adminId"] = $row["admin_id"];
           echo "<script>window.location.href='index.php'; </script>";
         }else {
           echo "<script>alert('Wrong password or email'); </script>";

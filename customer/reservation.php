@@ -1,6 +1,10 @@
 <?php
 // Start the session
 session_start();
+
+if (!isset($_SESSION["customerId"])){
+  echo "<script> alert('You need to login first!');window.location.href='login.php'; </script>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
