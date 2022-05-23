@@ -203,7 +203,8 @@ if (!isset($_SESSION["customerId"])){
         $return_date = $_SESSION["return_date"];
 
         
-        $sql = "SELECT * FROM car WHERE NOT EXISTS (SELECT car_id FROM carbooking cb WHERE $pick_up_date BETWEEN cb.start_date AND cb.end_date)";
+        $sql = "SELECT * FROM car WHERE car_id NOT IN (SELECT car_id FROM carbooking cb WHERE '$pick_up_date' BETWEEN cb.start_date AND cb.end_date)";
+        var_dump($sql);
         $result = $link->query($sql);
         if ($result->num_rows > 0) {
 
@@ -223,7 +224,7 @@ if (!isset($_SESSION["customerId"])){
               <img src='" . $secondRow["img_link"] . "' alt='' />\
               <div class='down-content'>\
                 <h4> " . $secondRow["model_name"] . " - " . $secondRow["brand_name"] . "</h4>\
-                <h6 id='price'><small>from</small> $" . $thirdRow["daily_price"] . " <small>per weekend</small></h6>\
+                <h6 id='price'><small>from</small> $" . $thirdRow["daily_price"] . " <small>per day</small></h6>\
                 <p>" . $row["description"] . "</p>\
                 <small>\
                   <strong title='passegengers'\

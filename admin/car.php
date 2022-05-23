@@ -129,7 +129,7 @@ if (!isset($_SESSION["adminId"])){
         <img src='" . $secondRow["img_link"] . "' alt='' />\
           <div class='down-content'>\
             <h4> " . $secondRow["model_name"] . " - " . $secondRow["brand_name"] . "</h4>\
-            <h6 id='price'><small>from</small> $" . $thirdRow["daily_price"] . " <small>per weekend</small></h6>\
+            <h6 id='price'><small>from</small> $" . $thirdRow["daily_price"] . " <small>per day</small></h6>\
             <p>" . $row["description"] . "</p>\
             <small>\
               <strong title='passegengers'\
