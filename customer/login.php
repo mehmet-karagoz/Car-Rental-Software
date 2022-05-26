@@ -58,9 +58,17 @@ session_start();
               <li class="nav-item">
                 <a class="nav-link" href="contact.php">Contact Us</a>
               </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="login.php">Login/Register</a>
-              </li>
+              <?php
+              if (!isset($_SESSION["customerId"])) {
+                echo '<li class="nav-item">
+                <a class="nav-link" href="login.php">Login</a>
+              </li>';
+              }else {
+                echo '<li class="nav-item">
+                <a class="nav-link" href="profile.php">My Profile</a>
+              </li>';
+              }
+              ?>
             </ul>
           </div>
         </div>
