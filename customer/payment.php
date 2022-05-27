@@ -120,12 +120,8 @@ if (!isset($_SESSION["customerId"])) {
         $expiry = $_POST["expiry"];
         $cvv = $_POST["cvv"];
         $customerId = $_SESSION["customerId"];
-        $locations = ["Antalya", "Ankara", "Isparta", "İstanbul"];
-
-
-
-        $pick_up_location = $locations[$_SESSION["pickup_location"]];
-        $return_location = $locations[$_SESSION["return_location"]];
+        $pick_up_location = $_SESSION["pickup_location"];
+        $return_location =$_SESSION["return_location"];
 
         $invoiceSql = "INSERT INTO invoice (payment_id, amount, payment_date) VALUES (1, $amount, '$currentDate')";
         if (mysqli_query($link, $invoiceSql)) {

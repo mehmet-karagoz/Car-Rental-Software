@@ -64,6 +64,8 @@ session_start();
     $rentBookSql = "SELECT * FROM rent WHERE rent_id=" . $_SESSION["rentid"];
     $resultBook = $link->query($rentBookSql);
     $rowBook = mysqli_fetch_assoc($resultBook);
+    $_SESSION["pickup_location"] = $rowBook["pick_up_address"];
+    $_SESSION["return_location"] = $rowBook["return_address"];
 
     $rentSql = "SELECT * FROM carbooking WHERE rent_id=" . $_SESSION["rentid"];
     $result = $link->query($rentSql);
@@ -103,21 +105,28 @@ session_start();
         if ($result->num_rows > 0) {
             
             $updateSql = "UPDATE carbooking SET start_date='$pickUpDate', end_date='$returnDate' WHERE rent_id=" . $_SESSION["rentid"];
-            if (mysqli_query($link, $updateSql)) {
+            if (mysqli_query($link, $updateSql) && $pickUpDate > $date_now && $returnDate > $date_now && $returnDate > $pickUpDate) {
                 echo "<script> alert('Successfully updated!!'); window.location.href='index.php'; </script>";
+            }else {
+                echo "<script> alert('Please pick a valid date!');</script>";
             }
 
         } else {
-            $_SESSION["pickup_location"] = $rowBook["pick_up_address"];
-            $_SESSION["return_location"] = $rowBook["return_address"];
+            
             $_SESSION["pickup_date"] = $pickUpDate;
             $_SESSION["return_date"] = $returnDate;
             $date_now = date("Y-m-d"); // this format is string comparable
             if ($pickUpDate > $date_now && $returnDate > $date_now && $returnDate > $pickUpDate) {
                 // $deleteSql = "DELETE FROM carbooking WHERE rent_id=" . $_SESSION["rentid"];
                 // if (mysqli_query($link, $deleteSql)) {
+                    $cancelSql = "UPDATE rent SET status=0 WHERE rent_id=" .$_SESSION["rentid"];
+            if (mysqli_query($link, $cancelSql)) {
+                
+                echo "<script>window.location.href = 'reservation.php' </script>";
+            } else {
+                echo "Error updating record: " . mysqli_error($link);
+            }
 
-                    echo "<script>window.location.href = 'reservation.php' </script>";
                 //}
             } else {
                 echo "<script> alert('Please pick a valid date!');</script>";
