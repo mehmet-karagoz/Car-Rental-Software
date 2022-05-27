@@ -35,6 +35,7 @@ session_start();
                 <a href="index.php" class="w3-button w3-black w3-block w3-hover-blue-grey w3-padding-16">Home</a>
                 <a href="#work" class="w3-button w3-black w3-block w3-hover-teal w3-padding-16">My Reservations</a>
                 <a href="#contact" class="w3-button w3-black w3-block w3-hover-brown w3-padding-16">Contact</a>
+                <form action="profile.php" method="get"><button name="logOut" type="submit" class="w3-button w3-black w3-block w3-hover-brown w3-padding-16">Log Out</button></form>
             </div>
         </div>
         <div class="w3-half w3-blue-grey w3-container" style="height:700px">
@@ -49,6 +50,13 @@ session_start();
         </div>
     </div>
 
+    <?php
+    if (isset($_GET["logOut"])) {
+        unset($_SESSION["customerId"]);
+        header("Location: index.php");
+        exit();
+    }
+    ?>
 
     <!-- Second Grid: Work & Resume -->
     <div class="w3-row">
@@ -78,7 +86,6 @@ session_start();
 
             $cancelSql = "UPDATE rent SET status=0 WHERE rent_id=" . $_GET["cancel"];
             if (mysqli_query($link, $cancelSql)) {
-                
             } else {
                 echo "Error updating record: " . mysqli_error($link);
             }
@@ -189,10 +196,11 @@ session_start();
 
         <script>
             function openBill() {
-                document.getElementById('id01').style.display='block';  
+                document.getElementById('id01').style.display = 'block';
             }
+
             function updateRent() {
-                window.location.href='update.php';
+                window.location.href = 'update.php';
             }
         </script>
 </body>
