@@ -173,7 +173,7 @@ session_start();
         //     echo "id: " . $row["customer_id"]. " - Name: " . $row["first_name"]. " " . $row["last_name"]. "<br>";
         //   }
         } else {
-            echo "Password or email incorrect";
+            echo "<script>alert('Password or email incorrect or account deactiveted')</script>";
         }
       }
       function test_input($data)

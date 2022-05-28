@@ -88,7 +88,7 @@ if (!isset($_SESSION["adminId"])){
         if (mysqli_query($link, $deleteSql)) {
           echo "<script> alert('Deactiveted SUCCESSFULLY'); </script>";
         } else {
-          echo "Error deleting record: " . mysqli_error($link);
+          echo "Error deactiveting user record: " . mysqli_error($link);
         }
       }
     ?>
@@ -199,7 +199,7 @@ if (!isset($_SESSION["adminId"])){
                 class='btn btn-outline-danger'\
                 onclick='deleteRow(this);'\
               >\
-                Delete\
+              Deactivete\
               </button>\
               </form>\
             </td>\

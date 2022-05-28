@@ -119,7 +119,24 @@ session_start();
             $amount = $invoiceRow["amount"];
             $status;
             if ($row["status"] == "1") {
-                $status = "Active";
+                $status = "Active</td>\
+                <td> <form>\
+                <a\
+                  name='update'\
+                  type='submit'\
+                  href='update.php?rentid=" . $row["rent_id"] . "'\
+                  class='btn btn-outline-info'\
+                >\
+                  Update\
+                </a><button\
+                value='" . $row["rent_id"] . "'\
+                name='cancel'\
+                type='submit'\
+                class='btn btn-outline-danger'\
+              >\
+                Cancel\
+              </button>\
+              </form>\</td>";
             } else {
                 $status = "Cancelled";
             }
@@ -128,25 +145,8 @@ session_start();
         <td>" . $date . "</td>\
         <td>" . $location . "</td>\
         <td>$" . $amount . "</td>\
-        <td>" . $status . "</td>\
-        <td> <form>\
-        <a\
-          name='update'\
-          type='submit'\
-          href='update.php?rentid=" . $row["rent_id"] . "'\
-          class='btn btn-outline-info'\
-        >\
-          Update\
-        </a>\
-        <button\
-          value='" . $row["rent_id"] . "'\
-          name='cancel'\
-          type='submit'\
-          class='btn btn-outline-danger'\
-        >\
-          Cancel\
-        </button>\
-        </form>\</td></tr>";
+        <td>" . $status . "\
+        </tr>";
         }
         echo "<script>document.getElementById(\"myBooking\").innerHTML=\"" . $table . "\"; </script>";
 
