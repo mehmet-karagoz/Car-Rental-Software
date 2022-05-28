@@ -72,7 +72,7 @@ if (!isset($_SESSION["adminId"])){
                 <a class="nav-link" href="car.php">Cars</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="login.php">Login</a>
+                <a class="nav-link" href="customers.php">Users</a>
               </li>
             </ul>
           </div>
@@ -162,7 +162,7 @@ if (!isset($_SESSION["adminId"])){
 
     <?php 
       $tableHtml = "";
-      $carBookingSql = "SELECT car_id, rent_id FROM carbooking";
+      $carBookingSql = "SELECT car_id, rent_id FROM carbooking ORDER BY rent_id DESC";
       $result = $link->query($carBookingSql);
       while($row = mysqli_fetch_assoc($result)) {
         $carSql = "SELECT model FROM car WHERE car_id=" . $row["car_id"];
@@ -174,10 +174,10 @@ if (!isset($_SESSION["adminId"])){
 
         $modelName = $modelRow["model_name"];
 
-        $rentSql = "SELECT customer_id, invoice_id FROM rent WHERE rent_id=" . $row["rent_id"];
+        $rentSql = "SELECT * FROM rent WHERE rent_id=" . $row["rent_id"];
         $rentResult = $link->query($rentSql);
         $rentRow = mysqli_fetch_assoc($rentResult);
-        $customerSql = "SELECT first_name, last_name FROM customer WHERE customer_id=" . $rentRow["customer_id"];
+        $customerSql = "SELECT * FROM customer WHERE customer_id=" . $rentRow["customer_id"];
         $customerResult = $link->query($customerSql);
         $customerRow = mysqli_fetch_assoc($customerResult);
 
@@ -186,7 +186,11 @@ if (!isset($_SESSION["adminId"])){
         $invoiceSql = "SELECT * FROM invoice WHERE invoice_id=" . $rentRow["invoice_id"];
         $invoiceResult = $link->query($invoiceSql);
         $invoiceRow = mysqli_fetch_assoc($invoiceResult);
-
+        if ( $rentRow["status"] == "1") {
+          $status = "<p id='done'>Active</p>";
+        }else {
+          $status = "<p id='progress'>Cancelled</p>";
+        }
         $date = $invoiceRow["payment_date"];
         $amount = $invoiceRow["amount"];
 
@@ -210,7 +214,7 @@ if (!isset($_SESSION["adminId"])){
         <td>" . $modelName . "</td>\
         <td>\
           <div class='status'>\
-            <p id='done'>Done</p>\
+            " . $status ."\
           </div>\
         </td>\
         <td>" . $date . "</td>\

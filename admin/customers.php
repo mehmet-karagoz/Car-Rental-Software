@@ -64,37 +64,50 @@ if (!isset($_SESSION["adminId"])){
                   >Dashboard</a
                 >
               </li>
-              <li class="nav-item active">
+              <li class="nav-item">
                 <a class="nav-link" href="reservation.php">Reservation</a>
               </li>
 
               <li class="nav-item">
                 <a class="nav-link" href="car.php">Cars</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item active">
                 <a class="nav-link" href="customers.php">Users</a>
               </li>
+              
             </ul>
           </div>
         </div>
       </nav>
     </header>
     <br /><br /><br /><br /><br />
-
+    <?php 
+    require_once "../config.php";
+    if(isset($_GET["delete"])) {
+        $deleteSql = "UPDATE customer SET account_status=0 WHERE customer_id=" . $_GET["delete"];
+        if (mysqli_query($link, $deleteSql)) {
+          echo "<script> alert('Deactiveted SUCCESSFULLY'); </script>";
+        } else {
+          echo "Error deleting record: " . mysqli_error($link);
+        }
+      }
+    ?>
     <div class="container recent-bookings">
-      <h3>Last 10 Day Car Bookings</h3>
+      <h3>Users</h3>
       <table class="table table-hover" id="myTable">
         <thead>
           <tr>
-            <th>Booking</th>
-            <th>Car</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>DOB</th>
+            <th>Gender</th>
+            <th>Email</th>
+            <th>Address</th>
             <th>Status</th>
-            <th>Date</th>
-            <th>Amount</th>
             <th>Action</th>
           </tr>
         </thead>
-        <tbody id="recentBooking">
+        <tbody id="users">
           
         </tbody>
       </table>
@@ -157,67 +170,30 @@ if (!isset($_SESSION["adminId"])){
     <?php 
       require_once "../config.php";
       $tableHtml = "";
-      $carBookingSql = "SELECT car_id, rent_id FROM carbooking";
-      $result = $link->query($carBookingSql);
+      $customerSql = "SELECT * FROM customer ORDER BY account_status DESC";
+      $result = $link->query($customerSql);
       while($row = mysqli_fetch_assoc($result)) {
-        $carSql = "SELECT model FROM car WHERE car_id=" . $row["car_id"];
-        $carResult = $link->query($carSql);
-        $carRow = mysqli_fetch_assoc($carResult);
-        $modelSql = "SELECT model_name FROM carmodel WHERE model_id=" . $carRow["model"];
-        $modelResult = $link->query($modelSql);
-        $modelRow = mysqli_fetch_assoc($modelResult);
-
-        $modelName = $modelRow["model_name"];
-
-        $rentSql = "SELECT * FROM rent WHERE rent_id=" . $row["rent_id"];
-        $rentResult = $link->query($rentSql);
-        $rentRow = mysqli_fetch_assoc($rentResult);
-        $customerSql = "SELECT first_name, last_name FROM customer WHERE customer_id=" . $rentRow["customer_id"];
-        $customerResult = $link->query($customerSql);
-        $customerRow = mysqli_fetch_assoc($customerResult);
-        if ( $rentRow["status"] == "1") {
+        if ( $row["account_status"] == "1") {
           $status = "<p id='done'>Active</p>";
         }else {
-          $status = "<p id='progress'>Cancelled</p>";
+          $status = "<p id='progress'>Deactiveted</p>";
         }
-        $booking = $customerRow["first_name"] . " " . $customerRow["last_name"];
-
-        $invoiceSql = "SELECT * FROM invoice WHERE invoice_id=" . $rentRow["invoice_id"];
-        $invoiceResult = $link->query($invoiceSql);
-        $invoiceRow = mysqli_fetch_assoc($invoiceResult);
-
-        $date = $invoiceRow["payment_date"];
-        $amount = $invoiceRow["amount"];
-
         $tableHtml = $tableHtml . "<tr>\
-        <td>\
-          <div class='d-flex flex-row flex-nowrap'>\
-            <!--div as flexbox with content in a row without wrap-->\
-            <div class='img img-responsive me-4'>\
-              <!--responsive img inside div-->\
-              <img\
-                class='img img-fluid'\
-                src='../images/team_04.jpg'\
-                width='50'\
-                height='50'\
-                alt=''\
-              />\
-            </div>\
-            <p>" . $booking . "</p>\
-          </div>\
-        </td>\
-        <td>" . $modelName . "</td>\
+        <td>" . $row["first_name"] . "</td>\
+        <td>" . $row["last_name"] . "</td>\
+        <td>" . $row["dob"] . "</td>\
+        <td>" . $row["gender"] . "</td>\
+        <td>" . $row["email"] . "</td>\
+        <td>" . $row["address"] . "</td>\
         <td>\
           <div class='status'>\
           " . $status ."\
           </div>\
         </td>\
-        <td>" . $date . "</td>\
-        <td>$" . $amount . "</td>\
         <td>\
               <form>\
               <button\
-                value='" . $rentRow["rent_id"] . "'\
+                value='" . $row["customer_id"] . "'\
                 name='delete'\
                 type='submit'\
                 class='btn btn-outline-danger'\
@@ -230,16 +206,9 @@ if (!isset($_SESSION["adminId"])){
       </tr>";
 
       }
-      echo "<script>document.getElementById(\"recentBooking\").innerHTML=\"" . $tableHtml . "\"; </script>";
+      echo "<script>document.getElementById(\"users\").innerHTML=\"" . $tableHtml . "\"; </script>";
 
-      if(isset($_GET["delete"])) {
-        $deleteSql = "DELETE FROM rent WHERE rent_id=" . $_GET["delete"];
-        if (mysqli_query($link, $deleteSql)) {
-          echo "<script> alert('DELETED SUCCESSFULLY'); </script>";
-        } else {
-          echo "Error deleting record: " . mysqli_error($link);
-        }
-      }
+      
     ?>
 
 

@@ -72,7 +72,7 @@ if (!isset($_SESSION["adminId"])){
                 <a class="nav-link" href="car.php">Cars</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="login.php">Login</a>
+                <a class="nav-link" href="customers.php">Users</a>
               </li>
             </ul>
           </div>

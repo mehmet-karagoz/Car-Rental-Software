@@ -71,9 +71,7 @@ if (!isset($_SESSION["adminId"])){
               <li class="nav-item active">
                 <a class="nav-link" href="car.php">Cars</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="login.php">Login</a>
-              </li>
+              
             </ul>
           </div>
         </div>
