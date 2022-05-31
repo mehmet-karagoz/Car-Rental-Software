@@ -68,13 +68,9 @@ if (!isset($_SESSION["adminId"])) {
         <table class="table table-hover" id="myTable">
             <thead>
                 <tr>
+                    <th>Car Id</th>
                     <th>Model Name</th>
                     <th>Brand Name</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Pick Up Address</th>
-                    <th>Return Address</th>
-                    <th>Status</th>
                 </tr>
             </thead>
             <tbody id="users">
@@ -125,42 +121,21 @@ if (!isset($_SESSION["adminId"])) {
     <?php
     require_once "../config.php";
     $tableHtml = "";
-    $carid = $_GET["carid"];
-    $carSql = "SELECT * FROM carbooking WHERE car_id=" . $carid;
-    $result = $link->query($carSql);
+    $address = $_GET["address"];
+    $addressSql = "SELECT * FROM rent WHERE pick_up_address='" . $address . "'";
+    $result = $link->query($addressSql);
     
     while ($row = mysqli_fetch_assoc($result)) {
 
-        $startDate = $row["start_date"];
-        $endDate = $row["end_date"];
-
-        $currentDate = date("Y-m-d");
-
-        $status = "Current";
-        if ($currentDate < $startDate) {
-            $status = "Future";
-        }else if ($currentDate > $endDate) {
-            $status = "Past";
-        }
-
-        $rentSql = "SELECT * FROM rent WHERE rent_id=" . $row["rent_id"];
-        $rentResult = $link->query($rentSql);
-        $rentRow = mysqli_fetch_assoc($rentResult);
-        $pickUpAddress = $rentRow["pick_up_address"];
-        $returnAddress = $rentRow["return_address"];
-
-        $customerSql = "SELECT * FROM customer WHERE customer_id=" . $rentRow["customer_id"];
-        $customerResult = $link->query($customerSql);
-        $customerRow = mysqli_fetch_assoc($customerResult);
-        $fname = $customerRow["first_name"];
-        $lname = $customerRow["last_name"];
-        
-
-        $carModelSql = "SELECT * FROM car WHERE car_id=" . $carid;
+        $carModelSql = "SELECT * FROM carbooking WHERE rent_id=" . $row["rent_id"];
         $carModelResult = $link->query($carModelSql);
         $carModelRow = mysqli_fetch_assoc($carModelResult);
 
-        $carForModelSql = "SELECT * FROM carmodel WHERE model_id=" . $carModelRow["model"];
+        $carSql = "SELECT * FROM car WHERE car_id=" . $carModelRow["car_id"];
+        $carResult = $link->query($carSql);
+        $carRow = mysqli_fetch_assoc($carResult);
+
+        $carForModelSql = "SELECT * FROM carmodel WHERE model_id=" . $carRow["model"];
         $carForModelResult = $link->query($carForModelSql);
         $carForModelRow = mysqli_fetch_assoc($carForModelResult);
 
@@ -168,17 +143,9 @@ if (!isset($_SESSION["adminId"])) {
         $brandName = $carForModelRow["brand_name"];
 
         $tableHtml = $tableHtml . "<tr>\
+        <td>" . $row["rent_id"] . "</td>\
         <td>" . $modelName . "</td>\
         <td>" . $brandName . "</td>\
-        <td>" . $fname . "</td>\
-        <td>" . $lname . "</td>\
-        <td><a href='cars.php?address=". $pickUpAddress . "'>" . $pickUpAddress . "</a></td>\
-        <td><a href='cars.php?address=". $returnAddress . "'>" . $returnAddress . "</a></td>\
-        <td>\
-          <div class='status'>\
-          " . $status . "\
-          </div>\
-        </td>\
       </tr>";
     }
     echo "<script>document.getElementById(\"users\").innerHTML=\"" . $tableHtml . "\"; </script>";
