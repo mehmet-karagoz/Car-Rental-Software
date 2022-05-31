@@ -91,6 +91,12 @@ if (!isset($_SESSION["adminId"])){
           echo "Error deactiveting user record: " . mysqli_error($link);
         }
       }
+
+      if (isset($_GET["showRents"])) {
+
+       echo "<script> window.location.href='customer-rent.php?customerId=". $_GET["showRents"] . "';</script>";
+
+      }
     ?>
     <div class="container recent-bookings">
       <h3>Users</h3>
@@ -192,6 +198,14 @@ if (!isset($_SESSION["adminId"])){
         </td>\
         <td>\
               <form>\
+              <button\
+                value='" . $row["customer_id"] . "'\
+                name='showRents'\
+                type='submit'\
+                class='btn btn-outline-info'\
+              >\
+              Show Rents\
+              </button>\
               <button\
                 value='" . $row["customer_id"] . "'\
                 name='delete'\
