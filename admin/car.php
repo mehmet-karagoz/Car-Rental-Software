@@ -155,6 +155,12 @@ if (!isset($_SESSION["adminId"])){
                   >\
                     Edit\
                   </a>\
+                  <a\
+                    class='btn btn-primary d-block w-100 bookCar text-white bg-dark border-dark'\
+                    href='car-detail-rent.php?carid=" . $row["car_id"] . "'\
+                  >\
+                    Show\
+                  </a>\
             </span>\
           </div>\
         </div>\
